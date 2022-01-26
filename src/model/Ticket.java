@@ -49,4 +49,10 @@ public class Ticket {
         this.status = "Closed";
     }
 
+    @Override
+    public String toString() {
+        return "Ticket: " + this.getId() + " " + this.getLocation().getClass().getSimpleName() + ": "
+                + this.location.getName();
+    }
+
 }
