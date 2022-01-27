@@ -19,7 +19,7 @@ public class Person {
         this.userType = userType;
     }
 
-    public int getId() {
+    public int getID() {
         return this.id;
     }
 

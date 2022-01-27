@@ -4,11 +4,13 @@ public class Ticket {
 
     private int id;
     private Location location;
+    private Person person;
     private String status;
 
-    public Ticket(int id, Location location) {
+    public Ticket(int id, Location location, Person person) {
         this.id = id;
         this.location = location;
+        this.person = person;
     }
 
     public Ticket(int id, Location location, String status) {
@@ -17,7 +19,7 @@ public class Ticket {
         this.status = status;
     }
 
-    public int getId() {
+    public int getID() {
         return this.id;
     }
 
@@ -31,6 +33,14 @@ public class Ticket {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public Person getPerson() {
+        return this.person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public String getStatus() {
@@ -51,7 +61,7 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket: " + this.getId() + " " + this.getLocation().getClass().getSimpleName() + ": "
+        return "Ticket: " + this.getID() + " " + this.getLocation().getClass().getSimpleName() + ": "
                 + this.location.getName();
     }
 
