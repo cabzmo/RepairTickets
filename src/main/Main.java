@@ -1,52 +1,39 @@
 package main;
 
-import model.Apartment;
-import model.Floor;
-import model.Manager;
-import model.Tenant;
-import model.Ticket;
-import model.Tower;
+import commands.OpenTicket;
+import commands.SetInProgress;
+import model.*;
 
 public class Main {
 
     public static void main(String[] args) {
+
+        Central central = new Central();
+
         Tower rayan = new Tower(1, "Rayan");
         Floor rayanFive = new Floor(2, "5", rayan);
         Apartment rayanFiveB = new Apartment(3, "5b", rayanFive);
-        // System.out.println(rayan);
-        // System.out.println();
-        // System.out.println(rayanFive);
-        // System.out.println();
-        // System.out.println(rayanFiveB);
 
         Manager manager = new Manager(4, "manager", "000", "email");
-        Ticket ticket5 = new Ticket(5, rayanFiveB);
-        Ticket ticket6 = new Ticket(6, rayanFiveB);
 
-        // for (Ticket ticket : manager.getTickets()) {
-        // System.out.println(ticket);
-        // System.out.println();
-        // }
-        System.out.println(manager);
+        central.addLocation(rayan);
+        central.addLocation(rayanFive);
+        central.addLocation(rayanFiveB);
+        central.addPerson(manager);
+
+        System.out.println(central.getPersonByID(manager.getID()));
+
+        new OpenTicket(rayanFiveB, manager).execute(central);
+
         System.out.println();
+        System.out.println(central.getPersonByID(manager.getID()));
 
-        manager.addTicket(ticket5);
-        manager.addTicket(ticket6);
+        new SetInProgress(central.getTicketByID(manager.getTickets().get(0).getID())).execute(central);
 
-        // for (Ticket ticket : manager.getTickets()) {
-        // System.out.println(ticket);
-        // System.out.println();
-        // }
-        System.out.println(manager);
         System.out.println();
+        System.out.println(central.getPersonByID(manager.getID()));
 
-        manager.removeTicket(ticket5);
-
-        // for (Ticket ticket : manager.getTickets()) {
-        // System.out.println(ticket);
-        // System.out.println();
-        // }
-        System.out.println(manager);
         System.out.println();
+        System.out.println(central.getTicketByID(manager.getTickets().get(0).getID()).getStatusHistory());
     }
 }

@@ -8,6 +8,7 @@ public class Central {
     private final ArrayList<Person> people = new ArrayList<>();
     private final ArrayList<Location> locations = new ArrayList<>();
     private final ArrayList<Ticket> tickets = new ArrayList<>();
+    private final ArrayList<Status> statuses = new ArrayList<>();
 
     public ArrayList<Person> getPeople() {
         return this.people;
@@ -115,6 +116,32 @@ public class Central {
             }
         }
         return personTickets;
+    }
+
+    public ArrayList<Status> getStatuses() {
+        return this.statuses;
+    }
+
+    public void addStatus(Status status) {
+        this.statuses.add(status);
+    }
+
+    public void removeStatus(Status searchStatus) {
+        for (Status status : this.statuses) {
+            if (searchStatus == status) {
+                this.statuses.remove(status);
+                break;
+            }
+        }
+    }
+
+    public Status getStatusByID(int id) {
+        for (Status status : this.statuses) {
+            if (status.getID() == id) {
+                return status;
+            }
+        }
+        return null;
     }
 
 }

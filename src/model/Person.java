@@ -80,7 +80,7 @@ public class Person {
     @Override
     public String toString() {
         // return super.toString();
-        return "Person: " + this.getId() + "\nName: " + this.getName() + "\nPhone: "
+        return "Person: " + this.getID() + "\nName: " + this.getName() + "\nPhone: "
                 + this.getPhone() + "\nEmail: " + this.getEmail() + "\nType: " + this.getUserType() + "\nTickets: "
                 + this.getTickets();
     }

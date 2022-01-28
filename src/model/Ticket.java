@@ -1,22 +1,18 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Ticket {
 
     private int id;
     private Location location;
     private Person person;
-    private String status;
+    private Status status;
+    private ArrayList<Status> statusHistory = new ArrayList<Status>();
 
-    public Ticket(int id, Location location, Person person) {
+    public Ticket(int id, Location location) {
         this.id = id;
         this.location = location;
-        this.person = person;
-    }
-
-    public Ticket(int id, Location location, String status) {
-        this.id = id;
-        this.location = location;
-        this.status = status;
     }
 
     public int getID() {
@@ -43,26 +39,23 @@ public class Ticket {
         this.person = person;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return this.status;
     }
 
-    public void setOpen() {
-        this.status = "Open";
+    public void setStatus(Status status) {
+        this.status = status;
+        statusHistory.add(status);
     }
 
-    public void setInProgress() {
-        this.status = "In Progress";
-    }
-
-    public void setClosed() {
-        this.status = "Closed";
+    public ArrayList<Status> getStatusHistory() {
+        return this.statusHistory;
     }
 
     @Override
     public String toString() {
-        return "Ticket: " + this.getID() + " " + this.getLocation().getClass().getSimpleName() + ": "
-                + this.location.getName();
+        return "Ticket: " + this.getID() + "; " + this.getLocation().getClass().getSimpleName() + ": "
+                + this.location.getName() + "; Status: " + this.getStatus();
     }
 
 }
