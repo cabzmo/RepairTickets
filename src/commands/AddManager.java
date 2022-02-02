@@ -21,9 +21,9 @@ public class AddManager implements Command {
     @Override
     public void execute(Central central) throws CentralException {
         int maxID = 0;
-        if (central.getTowers().size() > 0) {
-            int lastIndex = central.getTowers().size() - 1;
-            maxID = central.getTowers().get(lastIndex).getID();
+        if (central.getManagers().size() > 0) {
+            int lastIndex = central.getManagers().size() - 1;
+            maxID = central.getManagers().get(lastIndex).getID();
         }
 
         for (Person person : central.getPeople()) {

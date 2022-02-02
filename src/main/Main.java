@@ -7,6 +7,11 @@ import commands.AddFloor;
 import commands.AddManager;
 import commands.AddTenant;
 import commands.AddTower;
+import commands.RemoveApartment;
+import commands.RemoveFloor;
+import commands.RemoveManager;
+import commands.RemoveTenant;
+import commands.RemoveTower;
 import data.CentralData;
 import model.Central;
 
@@ -31,16 +36,22 @@ public class Main {
 
         // System.out.println(central.getTowers());
 
+        // new AddTower("Rayan").execute(central);
+        // new AddFloor("5", 1).execute(central);
+        // new AddApartment("5b", 1).execute(central);
+        // new AddManager("manager", "000", "email").execute(central);
+        // new AddTenant("tenant", "001", "email1").execute(central);
+        // new RemoveTower(1).execute(central);
+        // new RemoveFloor(1).execute(central);
+        // new RemoveApartment(1).execute(central);
+        // new RemoveManager(1).execute(central);
+        // new RemoveTenant(1).execute(central);
+
         System.out.println("Towers: \n" + central.getTowers());
         System.out.println("\nFloors: \n" + central.getFloors());
         System.out.println("\nApartments: \n" + central.getApartments());
         System.out.println("\nManagers: \n" + central.getManagers());
         System.out.println("\nTenants: \n" + central.getTenants());
-
-        // new AddTower("Mina").execute(central);
-        // new AddFloor("6", 1).execute(central);
-        // new AddApartment("6b", 2).execute(central);
-        new AddTenant("tenant", "002", "email1").execute(central);
 
         CentralData.store(central);
 

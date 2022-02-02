@@ -20,9 +20,9 @@ public class AddTenant implements Command {
     @Override
     public void execute(Central central) throws CentralException {
         int maxID = 0;
-        if (central.getTowers().size() > 0) {
-            int lastIndex = central.getTowers().size() - 1;
-            maxID = central.getTowers().get(lastIndex).getID();
+        if (central.getTenants().size() > 0) {
+            int lastIndex = central.getTenants().size() - 1;
+            maxID = central.getTenants().get(lastIndex).getID();
         }
 
         for (Person person : central.getPeople()) {

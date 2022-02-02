@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import main.CentralException;
+
 public class Central {
 
     private final ArrayList<Manager> managers = new ArrayList<>();
@@ -179,6 +181,15 @@ public class Central {
 
     public ArrayList<Tower> getTowers() {
         return this.towers;
+    }
+
+    public Tower getTowerByID(int towerID) {
+        for (Tower tower : this.getTowers()) {
+            if (tower.getID() == towerID) {
+                return tower;
+            }
+        }
+        return null;
     }
 
     public ArrayList<Floor> getFloors() {
