@@ -2,13 +2,13 @@ package main;
 
 import java.io.IOException;
 
+import commands.AddApartment;
+import commands.AddFloor;
+import commands.AddManager;
+import commands.AddTenant;
+import commands.AddTower;
 import data.CentralData;
-import model.Apartment;
 import model.Central;
-import model.Floor;
-import model.Manager;
-import model.Tenant;
-import model.Tower;
 
 public class Main {
 
@@ -31,11 +31,16 @@ public class Main {
 
         // System.out.println(central.getTowers());
 
-        System.out.println("Towers: \t" + central.getTowers());
-        System.out.println("\nFloors: \t" + central.getFloors());
-        System.out.println("\nApartments: \t" + central.getApartments());
-        System.out.println("\nManagers: \t" + central.getManagers());
-        System.out.println("\nTenants: \t" + central.getTenants());
+        System.out.println("Towers: \n" + central.getTowers());
+        System.out.println("\nFloors: \n" + central.getFloors());
+        System.out.println("\nApartments: \n" + central.getApartments());
+        System.out.println("\nManagers: \n" + central.getManagers());
+        System.out.println("\nTenants: \n" + central.getTenants());
+
+        // new AddTower("Mina").execute(central);
+        // new AddFloor("6", 1).execute(central);
+        // new AddApartment("6b", 2).execute(central);
+        new AddTenant("tenant", "002", "email1").execute(central);
 
         CentralData.store(central);
 
