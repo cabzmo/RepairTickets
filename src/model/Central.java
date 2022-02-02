@@ -1,34 +1,63 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class Central {
 
-    private final ArrayList<Person> people = new ArrayList<>();
-    private final ArrayList<Location> locations = new ArrayList<>();
+    private final ArrayList<Manager> managers = new ArrayList<>();
+    private final ArrayList<Tenant> tenants = new ArrayList<>();
+    private final ArrayList<Tower> towers = new ArrayList<>();
+    private final ArrayList<Floor> floors = new ArrayList<>();
+    private final ArrayList<Apartment> apartments = new ArrayList<>();
     private final ArrayList<Ticket> tickets = new ArrayList<>();
     private final ArrayList<Status> statuses = new ArrayList<>();
 
+    // public ArrayList<Person> getPeople() {
+    // return this.people;
+    // }
+
     public ArrayList<Person> getPeople() {
-        return this.people;
+        ArrayList<Person> people = new ArrayList<Person>();
+        people.addAll(this.getManagers());
+        people.addAll(this.getTenants());
+        return people;
     }
 
-    public void addPerson(Person person) {
-        this.people.add(person);
+    public void addManager(Manager manager) {
+        this.managers.add(manager);
     }
 
-    public void removePerson(Person searchPerson) {
-        for (Person person : this.people) {
-            if (searchPerson == person) {
-                this.people.remove(person);
-                break;
-            }
-        }
+    public void removeManager(Manager manager) {
+        this.managers.remove(manager);
     }
+
+    public ArrayList<Manager> getManagers() {
+        return this.managers;
+    }
+
+    public void addTenant(Tenant tenant) {
+        this.tenants.add(tenant);
+    }
+
+    public void removeTenant(Tenant tenant) {
+        this.tenants.remove(tenant);
+    }
+
+    public ArrayList<Tenant> getTenants() {
+        return this.tenants;
+    }
+
+    // public void removePerson(Person searchPerson) {
+    // for (Person person : this.people) {
+    // if (searchPerson == person) {
+    // this.people.remove(person);
+    // break;
+    // }
+    // }
+    // }
 
     public Person getPersonByID(int id) {
-        for (Person person : this.people) {
+        for (Person person : this.getPeople()) {
             if (person.getID() == id) {
                 return person;
             }
@@ -37,7 +66,7 @@ public class Central {
     }
 
     public Person getPersonByName(String name) {
-        for (Person person : this.people) {
+        for (Person person : this.getPeople()) {
             if (person.getName() == name) {
                 return person;
             }
@@ -46,30 +75,118 @@ public class Central {
     }
 
     public ArrayList<Location> getLocations() {
-        return this.locations;
+        ArrayList<Location> locations = new ArrayList<Location>();
+        locations.addAll(this.getTowers());
+        locations.addAll(this.getFloors());
+        locations.addAll(this.getApartments());
+        return locations;
     }
 
-    public void addLocation(Location location) {
-        this.locations.add(location);
+    // public void addLocation(Location location) {
+    // this.locations.add(location);
+    // }
+
+    public void addTower(Tower tower) {
+        this.towers.add(tower);
     }
 
-    public void removeLocation(Location searchLocation) {
-        for (Location location : this.locations) {
-            if (searchLocation == location) {
-                this.locations.remove(location);
+    public void addFloor(Floor floor) {
+        this.floors.add(floor);
+    }
+
+    public void addApartment(Apartment apartment) {
+        this.apartments.add(apartment);
+    }
+
+    // public void removeLocation(Location searchLocation) {
+    // for (Location location : this.locations) {
+    // if (searchLocation == location) {
+    // this.locations.remove(location);
+    // break;
+    // }
+    // }
+
+    // }
+
+    public void removeTower(Tower searchTower) {
+        for (Tower tower : this.towers) {
+            if (searchTower == tower) {
+                this.towers.remove(tower);
                 break;
             }
         }
 
     }
 
-    public Location getLocationByID(int id) {
-        for (Location location : this.locations) {
-            if (location.getID() == id) {
-                return location;
+    public void removeFloor(Floor searchFloor) {
+        for (Floor floor : this.floors) {
+            if (searchFloor == floor) {
+                this.floors.remove(floor);
+                break;
             }
         }
-        return null;
+
+    }
+
+    public void removeApartment(Apartment searchApartment) {
+        for (Apartment apartment : this.apartments) {
+            if (searchApartment == apartment) {
+                this.apartments.remove(apartment);
+                break;
+            }
+        }
+
+    }
+
+    // public Location getLocationByID(int id) {
+    // for (Location location : this.locations) {
+    // if (location.getID() == id) {
+    // return location;
+    // }
+    // }
+    // return null;
+    // }
+
+    // public ArrayList<Location> getTowers() {
+    // ArrayList<Location> towers = new ArrayList<Location>();
+    // for (Location location : locations) {
+    // if (location.getClass().getSimpleName().equals("Tower")) {
+    // towers.add(location);
+    // }
+    // }
+    // return towers;
+    // }
+
+    // public ArrayList<Location> getFloors() {
+    // ArrayList<Location> towers = new ArrayList<Location>();
+    // for (Location location : locations) {
+    // if (location.getClass().getSimpleName().equals("Floor")) {
+    // towers.add(location);
+    // }
+    // }
+    // return towers;
+    // }
+
+    // public ArrayList<Location> getApartments() {
+    // ArrayList<Location> towers = new ArrayList<Location>();
+    // for (Location location : locations) {
+    // if (location.getClass().getSimpleName().equals("Apartment")) {
+    // towers.add(location);
+    // }
+    // }
+    // return towers;
+    // }
+
+    public ArrayList<Tower> getTowers() {
+        return this.towers;
+    }
+
+    public ArrayList<Floor> getFloors() {
+        return this.floors;
+    }
+
+    public ArrayList<Apartment> getApartments() {
+        return this.apartments;
     }
 
     public ArrayList<Ticket> getTickets() {

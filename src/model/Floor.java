@@ -2,23 +2,23 @@ package model;
 
 public class Floor extends Location {
 
-    private Tower tower;
+    private int towerID;
 
-    public Floor(int id, String name, Tower tower) {
+    public Floor(int id, String name, int towerID) {
         super(id, name);
-        this.tower = tower;
+        this.towerID = towerID;
     }
 
-    public Tower getTower() {
-        return this.tower;
+    public int getTowerID() {
+        return this.towerID;
     }
 
-    public void setTower(Tower tower) {
-        this.tower = tower;
+    public void setTowerID(int towerID) {
+        this.towerID = towerID;
     }
 
     @Override
     public String toString() {
-        return "Tower: " + this.tower.getName() + "\nFloor: " + this.getName();
+        return "Floor: " + this.getName() + "\nTowerID: " + this.getTowerID();
     }
 }

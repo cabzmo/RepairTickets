@@ -2,7 +2,6 @@ package commands;
 
 import model.Central;
 import model.ClosedStatus;
-import model.InProgressStatus;
 import model.Ticket;
 
 public class SetClosed implements Command {

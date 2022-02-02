@@ -1,48 +1,43 @@
 package main;
 
-import commands.OpenTicket;
-import commands.SetClosed;
-import commands.SetInProgress;
-import model.*;
+import java.io.IOException;
+
+import data.CentralData;
+import model.Apartment;
+import model.Central;
+import model.Floor;
+import model.Manager;
+import model.Tenant;
+import model.Tower;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CentralException, IOException {
 
-        Central central = new Central();
+        Central central = CentralData.load();
 
-        Tower rayan = new Tower(1, "Rayan");
-        Floor rayanFive = new Floor(2, "5", 1);
-        Apartment rayanFiveB = new Apartment(3, "5b", 2);
+        // Tower rayan = new Tower(1, "Rayan");
+        // Floor rayanFive = new Floor(2, "5", 1);
+        // Apartment rayanFiveB = new Apartment(3, "5b", 2);
 
-        Manager manager = new Manager(4, "manager", "000", "email");
+        // Manager manager = new Manager(4, "manager", "000", "email");
+        // Tenant tenant = new Tenant(5, "tenant", "001", "email1");
 
-        central.addLocation(rayan);
-        central.addLocation(rayanFive);
-        central.addLocation(rayanFiveB);
-        central.addPerson(manager);
+        // central.addTower(rayan);
+        // central.addFloor(rayanFive);
+        // central.addApartment(rayanFiveB);
+        // central.addManager(manager);
+        // central.addTenant(tenant);
 
-        System.out.println(central.getPersonByID(manager.getID()));
+        // System.out.println(central.getTowers());
 
-        new OpenTicket(rayanFiveB, manager).execute(central);
+        System.out.println("Towers: \t" + central.getTowers());
+        System.out.println("\nFloors: \t" + central.getFloors());
+        System.out.println("\nApartments: \t" + central.getApartments());
+        System.out.println("\nManagers: \t" + central.getManagers());
+        System.out.println("\nTenants: \t" + central.getTenants());
 
-        System.out.println();
-        System.out.println(central.getPersonByID(manager.getID()));
+        CentralData.store(central);
 
-        new SetInProgress(central.getTicketByID(manager.getTickets().get(0).getID())).execute(central);
-
-        System.out.println();
-        System.out.println(central.getPersonByID(manager.getID()));
-
-        System.out.println();
-        System.out.println(central.getTicketByID(manager.getTickets().get(0).getID()).getStatusHistory());
-
-        new SetClosed(central.getTicketByID(manager.getTickets().get(0).getID())).execute(central);
-
-        System.out.println();
-        System.out.println(central.getPersonByID(manager.getID()));
-
-        System.out.println();
-        System.out.println(central.getTicketByID(manager.getTickets().get(0).getID()).getStatusHistory());
     }
 }

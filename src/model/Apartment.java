@@ -2,24 +2,23 @@ package model;
 
 public class Apartment extends Location {
 
-    private Floor floor;
+    private int floorID;
 
-    public Apartment(int id, String name, Floor floor) {
+    public Apartment(int id, String name, int floorID) {
         super(id, name);
-        this.floor = floor;
+        this.floorID = floorID;
     }
 
-    public Floor getFloor() {
-        return this.floor;
+    public int getFloorID() {
+        return this.floorID;
     }
 
-    public void setFloor(Floor floor) {
-        this.floor = floor;
+    public void setFloorID(int floorID) {
+        this.floorID = floorID;
     }
 
     @Override
     public String toString() {
-        return "Tower: " + this.floor.getTower().getName() + "\nFloor: " + this.floor.getName() + "\nApartment: "
-                + super.getName();
+        return "Apartment: " + super.getName() + "\nFloorID: " + this.getFloorID();
     }
 }
