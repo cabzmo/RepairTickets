@@ -16,18 +16,20 @@ public class RemoveFloor implements Command {
     public void execute(Central central) throws CentralException {
         boolean flag = false;
 
-        // need to check no apartments are connected to this floor before deleting
-
-        for (Floor floor : central.getFloors()) {
-            if (floor.getID() == this.floorID) {
-                central.removeFloor(floor);
-                flag = true;
-                break;
+        if (central.canCleanFloor(central.getFloorByID(this.floorID))) {
+            for (Floor floor : central.getFloors()) {
+                if (floor.getID() == this.floorID) {
+                    central.removeFloor(floor);
+                    flag = true;
+                    break;
+                }
             }
-        }
 
-        if (!flag) {
-            throw new CentralException("No floor with ID number " + this.floorID);
+            if (!flag) {
+                throw new CentralException("No floor with ID number " + this.floorID);
+            }
+        } else {
+            throw new CentralException("Floor with ID number " + this.floorID + " has dependencies");
         }
     }
 

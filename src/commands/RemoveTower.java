@@ -18,16 +18,20 @@ public class RemoveTower implements Command {
 
         // need to check no floors are connected to this tower before deleting
 
-        for (Tower tower : central.getTowers()) {
-            if (tower.getID() == this.towerID) {
-                central.removeTower(tower);
-                flag = true;
-                break;
+        if (central.canCleanTower(central.getTowerByID(this.towerID))) {
+            for (Tower tower : central.getTowers()) {
+                if (tower.getID() == this.towerID) {
+                    central.removeTower(tower);
+                    flag = true;
+                    break;
+                }
             }
-        }
 
-        if (!flag) {
-            throw new CentralException("No tower with ID number " + this.towerID);
+            if (!flag) {
+                throw new CentralException("No tower with ID number " + this.towerID);
+            }
+        } else {
+            throw new CentralException("Tower with ID number " + this.towerID + " has dependencies");
         }
     }
 

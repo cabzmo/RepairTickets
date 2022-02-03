@@ -16,18 +16,20 @@ public class RemoveManager implements Command {
     public void execute(Central central) throws CentralException {
         boolean flag = false;
 
-        // need to check no apartments are connected to this floor before deleting
-
-        for (Manager manager : central.getManagers()) {
-            if (manager.getID() == this.managerID) {
-                central.removeManager(manager);
-                flag = true;
-                break;
+        if (central.canCleanPerson(central.getManagerByID(this.managerID))) {
+            for (Manager manager : central.getManagers()) {
+                if (manager.getID() == this.managerID) {
+                    central.removeManager(manager);
+                    flag = true;
+                    break;
+                }
             }
-        }
 
-        if (!flag) {
-            throw new CentralException("No manager with ID number " + this.managerID);
+            if (!flag) {
+                throw new CentralException("No manager with ID number " + this.managerID);
+            }
+        } else {
+            throw new CentralException("Manager with ID number " + this.managerID + " has dependencies");
         }
     }
 

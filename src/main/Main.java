@@ -7,6 +7,7 @@ import commands.AddFloor;
 import commands.AddManager;
 import commands.AddTenant;
 import commands.AddTower;
+import commands.OpenTicket;
 import commands.RemoveApartment;
 import commands.RemoveFloor;
 import commands.RemoveManager;
@@ -14,6 +15,7 @@ import commands.RemoveTenant;
 import commands.RemoveTower;
 import data.CentralData;
 import model.Central;
+import model.Ticket;
 
 public class Main {
 
@@ -44,6 +46,10 @@ public class Main {
         // new RemoveTower(1).execute(central);
         // new RemoveFloor(1).execute(central);
         // new RemoveApartment(1).execute(central);
+
+        // new OpenTicket(central.getApartmentByID(1),
+        // central.getTenantByID(1)).execute(central);
+
         // new RemoveManager(1).execute(central);
         // new RemoveTenant(1).execute(central);
 

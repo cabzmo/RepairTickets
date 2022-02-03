@@ -14,10 +14,6 @@ public class Central {
     private final ArrayList<Ticket> tickets = new ArrayList<>();
     private final ArrayList<Status> statuses = new ArrayList<>();
 
-    // public ArrayList<Person> getPeople() {
-    // return this.people;
-    // }
-
     public ArrayList<Person> getPeople() {
         ArrayList<Person> people = new ArrayList<Person>();
         people.addAll(this.getManagers());
@@ -49,19 +45,19 @@ public class Central {
         return this.tenants;
     }
 
-    // public void removePerson(Person searchPerson) {
-    // for (Person person : this.people) {
-    // if (searchPerson == person) {
-    // this.people.remove(person);
-    // break;
-    // }
-    // }
-    // }
+    public Manager getManagerByID(int id) {
+        for (Manager manager : this.managers) {
+            if (manager.getID() == id) {
+                return manager;
+            }
+        }
+        return null;
+    }
 
-    public Person getPersonByID(int id) {
-        for (Person person : this.getPeople()) {
-            if (person.getID() == id) {
-                return person;
+    public Person getTenantByID(int id) {
+        for (Tenant tenant : this.tenants) {
+            if (tenant.getID() == id) {
+                return tenant;
             }
         }
         return null;
@@ -84,10 +80,6 @@ public class Central {
         return locations;
     }
 
-    // public void addLocation(Location location) {
-    // this.locations.add(location);
-    // }
-
     public void addTower(Tower tower) {
         this.towers.add(tower);
     }
@@ -99,16 +91,6 @@ public class Central {
     public void addApartment(Apartment apartment) {
         this.apartments.add(apartment);
     }
-
-    // public void removeLocation(Location searchLocation) {
-    // for (Location location : this.locations) {
-    // if (searchLocation == location) {
-    // this.locations.remove(location);
-    // break;
-    // }
-    // }
-
-    // }
 
     public void removeTower(Tower searchTower) {
         for (Tower tower : this.towers) {
@@ -140,45 +122,6 @@ public class Central {
 
     }
 
-    // public Location getLocationByID(int id) {
-    // for (Location location : this.locations) {
-    // if (location.getID() == id) {
-    // return location;
-    // }
-    // }
-    // return null;
-    // }
-
-    // public ArrayList<Location> getTowers() {
-    // ArrayList<Location> towers = new ArrayList<Location>();
-    // for (Location location : locations) {
-    // if (location.getClass().getSimpleName().equals("Tower")) {
-    // towers.add(location);
-    // }
-    // }
-    // return towers;
-    // }
-
-    // public ArrayList<Location> getFloors() {
-    // ArrayList<Location> towers = new ArrayList<Location>();
-    // for (Location location : locations) {
-    // if (location.getClass().getSimpleName().equals("Floor")) {
-    // towers.add(location);
-    // }
-    // }
-    // return towers;
-    // }
-
-    // public ArrayList<Location> getApartments() {
-    // ArrayList<Location> towers = new ArrayList<Location>();
-    // for (Location location : locations) {
-    // if (location.getClass().getSimpleName().equals("Apartment")) {
-    // towers.add(location);
-    // }
-    // }
-    // return towers;
-    // }
-
     public ArrayList<Tower> getTowers() {
         return this.towers;
     }
@@ -196,8 +139,26 @@ public class Central {
         return this.floors;
     }
 
+    public Floor getFloorByID(int floorID) {
+        for (Floor floor : this.getFloors()) {
+            if (floor.getID() == floorID) {
+                return floor;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Apartment> getApartments() {
         return this.apartments;
+    }
+
+    public Apartment getApartmentByID(int apartmentID) {
+        for (Apartment apartment : this.getApartments()) {
+            if (apartment.getID() == apartmentID) {
+                return apartment;
+            }
+        }
+        return null;
     }
 
     public ArrayList<Ticket> getTickets() {
@@ -270,6 +231,31 @@ public class Central {
             }
         }
         return null;
+    }
+
+    public boolean canCleanTower(Tower tower) {
+        for (Floor floor : this.floors) {
+            if (floor.getTowerID() == tower.getID()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean canCleanFloor(Floor floor) {
+        for (Apartment apartment : this.apartments) {
+            if (apartment.getFloorID() == floor.getID()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean canCleanPerson(Person person) {
+        if (person.getTickets().size() > 0) {
+            return false;
+        }
+        return true;
     }
 
 }
