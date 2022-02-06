@@ -24,8 +24,8 @@ public class OpenStatusDataManager implements DataManager {
                 String[] properties = line.split(SEPARATOR, -1);
                 try {
                     int id = Integer.parseInt(properties[0]);
-                    String name = properties[1];
-                    OpenStatus status = new OpenStatus(id, person);
+                    int personID = Integer.parseInt(properties[0]);
+                    OpenStatus status = new OpenStatus(id, central.getManagerByID(personID));
                     central.addStatus(status);
                 } catch (NumberFormatException ex) {
                     throw new CentralException("Unable to parse floor id " + properties[0] + " on line " + line_idx
