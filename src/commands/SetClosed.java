@@ -2,14 +2,17 @@ package commands;
 
 import model.Central;
 import model.ClosedStatus;
+import model.Person;
 import model.Ticket;
 
 public class SetClosed implements Command {
 
     private Ticket ticket;
+    private Person person;
 
-    public SetClosed(Ticket ticket) {
+    public SetClosed(Ticket ticket, Person person) {
         this.ticket = ticket;
+        this.person = person;
     }
 
     @Override
@@ -19,16 +22,9 @@ public class SetClosed implements Command {
             int lastIndex = central.getStatuses().size() - 1;
             maxStatusID = central.getStatuses().get(lastIndex).getID();
         }
-        ClosedStatus closedStatus = new ClosedStatus(++maxStatusID, ticket.getPerson());
-        // InProgressStatus inProgressStatus = new InProgressStatus(++maxStatusID,
-        // ticket.getPerson());
-        central.addStatus(closedStatus);
+        ClosedStatus closedStatus = new ClosedStatus(++maxStatusID, this.person);
 
-        // System.out.println();
-        // System.out.println("Ticket ---- " + ticket);
-        ticket.setStatus(closedStatus);
-        // System.out.println();
-        // System.out.println("Ticket ---- " + ticket);
+        central.changeTicketStatus(this.ticket, closedStatus);
 
     }
 

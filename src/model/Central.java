@@ -165,7 +165,8 @@ public class Central {
         return this.tickets;
     }
 
-    public void addTicket(Ticket ticket) {
+    public void addTicket(Ticket ticket, Person person) {
+        person.addTicket(ticket);
         this.tickets.add(ticket);
     }
 
@@ -231,6 +232,11 @@ public class Central {
             }
         }
         return null;
+    }
+
+    public void changeTicketStatus(Ticket ticket, Status status) {
+        this.statuses.add(status);
+        ticket.setStatus(status);
     }
 
     public boolean canCleanTower(Tower tower) {

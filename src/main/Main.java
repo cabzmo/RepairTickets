@@ -13,6 +13,8 @@ import commands.RemoveFloor;
 import commands.RemoveManager;
 import commands.RemoveTenant;
 import commands.RemoveTower;
+import commands.SetClosed;
+import commands.SetInProgress;
 import data.CentralData;
 import model.Central;
 import model.Ticket;
@@ -47,17 +49,29 @@ public class Main {
         // new RemoveFloor(1).execute(central);
         // new RemoveApartment(1).execute(central);
 
-        // new OpenTicket(central.getApartmentByID(1),
+        new OpenTicket(central.getApartmentByID(1),
+                central.getTenantByID(1)).execute(central);
+
+        new SetInProgress(central.getTicketByID(1), central.getManagerByID(1)).execute(central);
+
+        new SetInProgress(central.getTicketByID(1), central.getTenantByID(1)).execute(central);
+
+        new SetClosed(central.getTicketByID(1),
+                central.getManagerByID(1)).execute(central);
+
+        // new OpenTicket(central.getTowerByID(1),
         // central.getTenantByID(1)).execute(central);
 
         // new RemoveManager(1).execute(central);
         // new RemoveTenant(1).execute(central);
 
-        System.out.println("Towers: \n" + central.getTowers());
-        System.out.println("\nFloors: \n" + central.getFloors());
+        // System.out.println("Towers: \n" + central.getTowers());
+        // System.out.println("\nFloors: \n" + central.getFloors());
         System.out.println("\nApartments: \n" + central.getApartments());
         System.out.println("\nManagers: \n" + central.getManagers());
         System.out.println("\nTenants: \n" + central.getTenants());
+
+        System.out.println("\n" + central.getTicketByID(1).getStatusHistory());
 
         CentralData.store(central);
 

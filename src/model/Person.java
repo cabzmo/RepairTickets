@@ -63,6 +63,25 @@ public class Person {
         return this.tickets;
     }
 
+    public ArrayList<Ticket> getOpenTickets() {
+        ArrayList<Ticket> openTickets = new ArrayList<Ticket>();
+        for (Ticket ticket : tickets) {
+            if (!ticket.getStatus().getStatusName().equals("Closed")) {
+                openTickets.add(ticket);
+            }
+        }
+        return openTickets;
+    }
+
+    public Ticket getTicketByID(int ticketID) {
+        for (Ticket ticket : tickets) {
+            if (ticket.getID() == ticketID) {
+                return ticket;
+            }
+        }
+        return null;
+    }
+
     public void addTicket(Ticket ticket) {
         this.tickets.add(ticket);
     }
@@ -81,7 +100,8 @@ public class Person {
     public String toString() {
         // return super.toString();
         return "Person: " + this.getID() + "\nName: " + this.getName() + "\nPhone: "
-                + this.getPhone() + "\nEmail: " + this.getEmail() + "\nType: " + this.getUserType() + "\nTickets: "
+                + this.getPhone() + "\nEmail: " + this.getEmail() + "\nType: " + this.getUserType() + "\nOpen Tickets: "
+                + this.getOpenTickets() + "\nAll Tickets: "
                 + this.getTickets();
     }
 

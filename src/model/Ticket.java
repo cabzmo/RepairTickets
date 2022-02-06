@@ -10,9 +10,12 @@ public class Ticket {
     private Status status;
     private ArrayList<Status> statusHistory = new ArrayList<Status>();
 
-    public Ticket(int id, Location location) {
+    public Ticket(int id, Location location, Status status) {
         this.id = id;
         this.location = location;
+        location.addTicket(this);
+        this.status = status;
+        this.statusHistory.add(status);
     }
 
     public int getID() {
@@ -45,6 +48,7 @@ public class Ticket {
 
     public void setStatus(Status status) {
         this.status = status;
+        this.person = status.getPerson();
         statusHistory.add(status);
     }
 
@@ -55,7 +59,9 @@ public class Ticket {
     @Override
     public String toString() {
         return "Ticket: " + this.getID() + "; " + this.getLocation().getClass().getSimpleName() + ": "
-                + this.location.getName() + "; Status: " + this.getStatus();
+                + this.location.getName() + "; Status: " + this.getStatus().getStatusName() + "; Set by: "
+                + this.status.getPerson().getName() + "; Opened by: "
+                + this.statusHistory.get(0).getPerson().getName();
     }
 
 }

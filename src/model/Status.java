@@ -20,7 +20,7 @@ public class Status {
         this.id = id;
     }
 
-    public String getStatus() {
+    public String getStatusName() {
         return this.status;
     }
 
@@ -46,7 +46,7 @@ public class Status {
 
     @Override
     public String toString() {
-        return this.getStatus();
+        return "Status: " + this.getStatusName() + "; Set by: " + this.person.getName();
     }
 
 }

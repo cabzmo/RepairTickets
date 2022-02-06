@@ -19,6 +19,6 @@ public class Floor extends Location {
 
     @Override
     public String toString() {
-        return "Floor: " + this.getName() + "\nTowerID: " + this.getTowerID();
+        return "Floor: " + this.getName() + "\nTowerID: " + this.getTowerID() + "\nTickets: " + super.getTickets();
     }
 }
