@@ -20,9 +20,9 @@ public class AddApartment implements Command {
     @Override
     public void execute(Central central) throws CentralException {
         int maxID = 0;
-        if (central.getApartments().size() > 0) {
-            int lastIndex = central.getApartments().size() - 1;
-            maxID = central.getApartments().get(lastIndex).getID();
+        if (central.getLocations().size() > 0) {
+            int lastIndex = central.getLocations().size() - 1;
+            maxID = central.getLocations().get(lastIndex).getID();
         }
 
         for (Apartment apartment : central.getApartments()) {

@@ -20,9 +20,9 @@ public class AddFloor implements Command {
     @Override
     public void execute(Central central) throws CentralException {
         int maxID = 0;
-        if (central.getFloors().size() > 0) {
-            int lastIndex = central.getFloors().size() - 1;
-            maxID = central.getFloors().get(lastIndex).getID();
+        if (central.getLocations().size() > 0) {
+            int lastIndex = central.getLocations().size() - 1;
+            maxID = central.getLocations().get(lastIndex).getID();
         }
 
         for (Floor floor : central.getFloors()) {

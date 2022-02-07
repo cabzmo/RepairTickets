@@ -15,9 +15,9 @@ public class AddTower implements Command {
     @Override
     public void execute(Central central) throws CentralException {
         int maxID = 0;
-        if (central.getTowers().size() > 0) {
-            int lastIndex = central.getTowers().size() - 1;
-            maxID = central.getTowers().get(lastIndex).getID();
+        if (central.getLocations().size() > 0) {
+            int lastIndex = central.getLocations().size() - 1;
+            maxID = central.getLocations().get(lastIndex).getID();
         }
 
         for (Tower tower : central.getTowers()) {

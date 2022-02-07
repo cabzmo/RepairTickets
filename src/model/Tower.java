@@ -8,6 +8,6 @@ public class Tower extends Location {
 
     @Override
     public String toString() {
-        return "Tower: " + super.getName() + "\nTickets: " + super.getTickets();
+        return "Tower: " + super.getName() + "\nID: " + super.getID() + "\nTickets: " + super.getTickets();
     }
 }

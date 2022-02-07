@@ -19,7 +19,7 @@ public class Apartment extends Location {
 
     @Override
     public String toString() {
-        return "Apartment: " + super.getID() + "\nName: " + this.getName() + "\nFloorID: " + this.getFloorID()
+        return "Apartment: " + super.getName() + "\nID: " + this.getID() + "\nFloorID: " + this.getFloorID()
                 + "\nTickets: " + super.getTickets();
     }
 }
