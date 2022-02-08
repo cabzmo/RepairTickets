@@ -17,6 +17,8 @@ public class CentralData {
         dataManagers.add(new ApartmentDataManager());
         dataManagers.add(new ManagerDataManager());
         dataManagers.add(new TenantDataManager());
+        dataManagers.add(new OpenStatusDataManager());
+        dataManagers.add(new TicketDataManager());
     }
 
     public static Central load() throws CentralException, IOException {

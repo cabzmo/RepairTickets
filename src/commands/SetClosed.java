@@ -24,7 +24,7 @@ public class SetClosed implements Command {
         }
         ClosedStatus closedStatus = new ClosedStatus(++maxStatusID, this.person);
 
-        central.changeTicketStatus(this.ticket, closedStatus);
+        central.addClosedStatusToTicket(this.ticket, closedStatus);
 
     }
 

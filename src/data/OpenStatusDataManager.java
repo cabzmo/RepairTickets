@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 import main.CentralException;
 import model.Central;
-import model.Floor;
 import model.OpenStatus;
 
 public class OpenStatusDataManager implements DataManager {
@@ -24,11 +23,11 @@ public class OpenStatusDataManager implements DataManager {
                 String[] properties = line.split(SEPARATOR, -1);
                 try {
                     int id = Integer.parseInt(properties[0]);
-                    int personID = Integer.parseInt(properties[0]);
-                    OpenStatus status = new OpenStatus(id, central.getManagerByID(personID));
-                    central.addStatus(status);
+                    int personID = Integer.parseInt(properties[1]);
+                    OpenStatus status = new OpenStatus(id, central.getPersonByID(personID));
+                    central.addOpenStatus(status);
                 } catch (NumberFormatException ex) {
-                    throw new CentralException("Unable to parse floor id " + properties[0] + " on line " + line_idx
+                    throw new CentralException("Unable to parse status id " + properties[0] + " on line " + line_idx
                             + "\nError: " + ex);
                 }
                 line_idx++;
@@ -39,10 +38,9 @@ public class OpenStatusDataManager implements DataManager {
     @Override
     public void storeData(Central central) throws IOException {
         try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
-            for (Floor floor : central.getFloors()) {
-                out.print(floor.getID() + SEPARATOR);
-                out.print(floor.getName() + SEPARATOR);
-                out.print(floor.getTowerID() + SEPARATOR);
+            for (OpenStatus status : central.getOpenStatuses()) {
+                out.print(status.getID() + SEPARATOR);
+                out.print(status.getPerson().getID() + SEPARATOR);
                 out.println();
             }
         }

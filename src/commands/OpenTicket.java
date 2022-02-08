@@ -23,16 +23,20 @@ public class OpenTicket implements Command {
             int lastIndex = central.getStatuses().size() - 1;
             maxStatusID = central.getStatuses().get(lastIndex).getID();
         }
-        OpenStatus status = new OpenStatus(maxStatusID, this.person);
+        OpenStatus openStatus = new OpenStatus(++maxStatusID, this.person);
+
+        // central.addStatus(openStatus);
+        central.addOpenStatus(openStatus);
 
         int maxTicketID = 0;
         if (central.getTickets().size() > 0) {
             int lastIndex = central.getTickets().size() - 1;
             maxTicketID = central.getTickets().get(lastIndex).getID();
         }
-        Ticket ticket = new Ticket(++maxTicketID, location, status);
+        Ticket ticket = new Ticket(++maxTicketID, location, openStatus);
 
-        central.addTicket(ticket, person);
+        person.addTicket(ticket);
+        central.addTicket(ticket);
     }
 
 }

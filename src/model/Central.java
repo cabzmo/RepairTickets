@@ -12,7 +12,9 @@ public class Central {
     private final ArrayList<Floor> floors = new ArrayList<>();
     private final ArrayList<Apartment> apartments = new ArrayList<>();
     private final ArrayList<Ticket> tickets = new ArrayList<>();
-    private final ArrayList<Status> statuses = new ArrayList<>();
+    private final ArrayList<OpenStatus> openStatuses = new ArrayList<>();
+    private final ArrayList<InProgressStatus> inProgressStatuses = new ArrayList<>();
+    private final ArrayList<ClosedStatus> closedStatuses = new ArrayList<>();
 
     public ArrayList<Person> getPeople() {
         ArrayList<Person> people = new ArrayList<Person>();
@@ -58,6 +60,15 @@ public class Central {
         for (Tenant tenant : this.tenants) {
             if (tenant.getID() == id) {
                 return tenant;
+            }
+        }
+        return null;
+    }
+
+    public Person getPersonByID(int personID) {
+        for (Person person : this.getPeople()) {
+            if (person.getID() == personID) {
+                return person;
             }
         }
         return null;
@@ -161,12 +172,20 @@ public class Central {
         return null;
     }
 
+    public Location getLocationByID(int locationID) {
+        for (Location location : this.getLocations()) {
+            if (location.getID() == locationID) {
+                return location;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Ticket> getTickets() {
         return this.tickets;
     }
 
-    public void addTicket(Ticket ticket, Person person) {
-        person.addTicket(ticket);
+    public void addTicket(Ticket ticket) {
         this.tickets.add(ticket);
     }
 
@@ -201,7 +220,7 @@ public class Central {
     public ArrayList<Ticket> getTicketsByPerson(Person person) {
         ArrayList<Ticket> personTickets = new ArrayList<>();
         for (Ticket ticket : this.tickets) {
-            if (ticket.getPerson() == person) {
+            if (ticket.getStatus().getPerson() == person) {
                 personTickets.add(ticket);
             }
         }
@@ -209,24 +228,66 @@ public class Central {
     }
 
     public ArrayList<Status> getStatuses() {
-        return this.statuses;
+        ArrayList<Status> statuses = new ArrayList<Status>();
+        statuses.addAll(this.getOpenStatuses());
+        statuses.addAll(this.getInProgressStatuses());
+        statuses.addAll(this.getClosedStatuses());
+        return statuses;
     }
 
-    public void addStatus(Status status) {
-        this.statuses.add(status);
+    public ArrayList<OpenStatus> getOpenStatuses() {
+        return this.openStatuses;
     }
 
-    public void removeStatus(Status searchStatus) {
-        for (Status status : this.statuses) {
-            if (searchStatus == status) {
-                this.statuses.remove(status);
+    public ArrayList<InProgressStatus> getInProgressStatuses() {
+        return this.inProgressStatuses;
+    }
+
+    public ArrayList<ClosedStatus> getClosedStatuses() {
+        return this.closedStatuses;
+    }
+
+    public void addOpenStatus(OpenStatus openStatus) {
+        this.openStatuses.add(openStatus);
+    }
+
+    public void addInProgressStatus(InProgressStatus inProgressStatus) {
+        this.inProgressStatuses.add(inProgressStatus);
+    }
+
+    public void addClosedStatus(ClosedStatus closedStatus) {
+        this.closedStatuses.add(closedStatus);
+    }
+
+    public void removeOpenStatus(OpenStatus searchOpenStatus) {
+        for (OpenStatus openStatus : this.openStatuses) {
+            if (searchOpenStatus == openStatus) {
+                this.openStatuses.remove(openStatus);
+                break;
+            }
+        }
+    }
+
+    public void removeInProgressStatus(InProgressStatus searchInProgressStatus) {
+        for (InProgressStatus inProgressStatus : this.inProgressStatuses) {
+            if (searchInProgressStatus == inProgressStatus) {
+                this.inProgressStatuses.remove(inProgressStatus);
+                break;
+            }
+        }
+    }
+
+    public void removeClosedStatus(ClosedStatus searchClosedStatus) {
+        for (ClosedStatus closedStatus : this.closedStatuses) {
+            if (searchClosedStatus == closedStatus) {
+                this.closedStatuses.remove(closedStatus);
                 break;
             }
         }
     }
 
     public Status getStatusByID(int id) {
-        for (Status status : this.statuses) {
+        for (Status status : this.getStatuses()) {
             if (status.getID() == id) {
                 return status;
             }
@@ -234,8 +295,18 @@ public class Central {
         return null;
     }
 
-    public void changeTicketStatus(Ticket ticket, Status status) {
-        this.statuses.add(status);
+    public void addOpenStatusToTicket(Ticket ticket, OpenStatus status) {
+        this.openStatuses.add(status);
+        ticket.setStatus(status);
+    }
+
+    public void addInProgressStatusToTicket(Ticket ticket, InProgressStatus status) {
+        this.inProgressStatuses.add(status);
+        ticket.setStatus(status);
+    }
+
+    public void addClosedStatusToTicket(Ticket ticket, ClosedStatus status) {
+        this.closedStatuses.add(status);
         ticket.setStatus(status);
     }
 

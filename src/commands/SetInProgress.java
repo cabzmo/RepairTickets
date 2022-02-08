@@ -25,7 +25,7 @@ public class SetInProgress implements Command {
 
         InProgressStatus inProgressStatus = new InProgressStatus(++maxStatusID, this.person);
 
-        central.changeTicketStatus(this.ticket, inProgressStatus);
+        central.addInProgressStatusToTicket(this.ticket, inProgressStatus);
 
         // central.addStatus(inProgressStatus);
 

@@ -6,7 +6,6 @@ public class Ticket {
 
     private int id;
     private Location location;
-    private Person person;
     private Status status;
     private ArrayList<Status> statusHistory = new ArrayList<Status>();
 
@@ -34,26 +33,27 @@ public class Ticket {
         this.location = location;
     }
 
-    public Person getPerson() {
-        return this.person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
     public Status getStatus() {
         return this.status;
     }
 
     public void setStatus(Status status) {
         this.status = status;
-        this.person = status.getPerson();
         statusHistory.add(status);
     }
 
     public ArrayList<Status> getStatusHistory() {
         return this.statusHistory;
+    }
+
+    public ArrayList<Person> getPeople() {
+        ArrayList<Person> people = new ArrayList<Person>();
+        for (Status status : this.statusHistory) {
+            if (!people.contains(status.getPerson())) {
+                people.add(status.getPerson());
+            }
+        }
+        return people;
     }
 
     @Override
