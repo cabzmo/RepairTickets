@@ -4,7 +4,6 @@ import main.CentralException;
 import model.Central;
 import model.Manager;
 import model.Person;
-import model.Tower;
 
 public class AddManager implements Command {
 

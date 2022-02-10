@@ -2,8 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import main.CentralException;
-
 public class Central {
 
     private final ArrayList<Manager> managers = new ArrayList<>();

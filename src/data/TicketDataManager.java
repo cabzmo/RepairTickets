@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 import main.CentralException;
 import model.Central;
-import model.OpenStatus;
 import model.Status;
 import model.Ticket;
 
