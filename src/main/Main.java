@@ -17,6 +17,8 @@ import commands.SetClosed;
 import commands.SetInProgress;
 import data.CentralData;
 import model.Central;
+import model.InProgressStatus;
+import model.Status;
 import model.Ticket;
 
 public class Main {
@@ -49,8 +51,8 @@ public class Main {
         // new RemoveFloor(1).execute(central);
         // new RemoveApartment(1).execute(central);
 
-        // new OpenTicket(central.getApartmentByID(3),
-        // central.getTenantByID(2)).execute(central);
+        new OpenTicket(central.getFloorByID(2),
+                central.getManagerByID(1)).execute(central);
 
         // new SetInProgress(central.getTicketByID(1),
         // central.getManagerByID(1)).execute(central);
@@ -76,7 +78,15 @@ public class Main {
         // System.out.println("\n" + central.getTicketByID(1).getStatusHistory());
         // System.out.println("\n" + central.getTicketByID(1).getStatus().getID());
 
-        System.out.println(central.getStatuses());
+        System.out.println("Statuses: ");
+        for (Status status : central.getStatuses()) {
+            System.out.println(status.getID());
+        }
+
+        System.out.println("Tickets: ");
+        for (Ticket ticket : central.getTickets()) {
+            System.out.println(ticket.getID());
+        }
 
         CentralData.store(central);
 

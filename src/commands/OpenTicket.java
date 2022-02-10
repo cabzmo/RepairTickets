@@ -35,8 +35,8 @@ public class OpenTicket implements Command {
         }
         Ticket ticket = new Ticket(++maxTicketID, location, openStatus);
 
-        person.addTicket(ticket);
         central.addTicket(ticket);
+        central.addOpenStatusToTicket(ticket, openStatus);
     }
 
 }

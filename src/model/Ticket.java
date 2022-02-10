@@ -12,9 +12,16 @@ public class Ticket {
     public Ticket(int id, Location location, Status status) {
         this.id = id;
         this.location = location;
-        location.addTicket(this);
         this.status = status;
         this.statusHistory.add(status);
+    }
+
+    public Ticket(int id, Location location, ArrayList<Status> statusHistory) {
+        this.id = id;
+        this.location = location;
+        location.addTicket(this);
+        this.statusHistory = statusHistory;
+        this.status = this.statusHistory.get(statusHistory.size() - 1);
     }
 
     public int getID() {

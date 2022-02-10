@@ -297,6 +297,8 @@ public class Central {
 
     public void addOpenStatusToTicket(Ticket ticket, OpenStatus status) {
         this.openStatuses.add(status);
+        ticket.getLocation().addTicket(ticket);
+        status.getPerson().addTicket(ticket);
         ticket.setStatus(status);
     }
 

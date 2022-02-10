@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import main.CentralException;
@@ -26,34 +27,44 @@ public class TicketDataManager implements DataManager {
                 try {
                     int id = Integer.parseInt(properties[0]);
                     int locationID = Integer.parseInt(properties[1]);
-                    Ticket ticket = new Ticket(id, location, status);
+
+                    // ID::locatioID::statusHistory
                     System.out.println("\nproperties[0]: \t" + properties[0]);
                     System.out.println("\nproperties[1]: \t" + properties[1]);
                     System.out.println("\nproperties[2]: \t" + properties[2]);
-                    String numWithCommas = properties[2].substring(1, properties[2].length() - 1);
+                    String numWithCommas = properties[2].substring(1, properties[2].length() - 2);
                     System.out.println("\nNumbers with commas: \t" + numWithCommas);
-                    String[] statusHistory = numWithCommas.split(",", -1);
-                    int count = 0;
+                    String[] stringStatusHistory = numWithCommas.split(",", -1);
 
-                    for (String stringStatusID : statusHistory) {
-                        System.out.println("\nstatusHistory[" + count + "]: \t" + stringStatusID);
+                    ArrayList<Status> statusHistory = new ArrayList<Status>();
+                    for (String stringStatusID : stringStatusHistory) {
                         int statusID = Integer.parseInt(stringStatusID);
-                        String statusType = central.getStatusByID(statusID).getStatusName();
-                        if (statusType.equals("Open")) {
-                            OpenStatus status = new OpenStatus(1, central.getPersonByID(1));
-
-                        } else {
-                            status = new OpenStatus(1, central.getPersonByID(1));
-                        }
-                        count++;
+                        statusHistory.add(central.getStatusByID(statusID));
                     }
+                    Ticket ticket = new Ticket(id, central.getLocationByID(locationID), statusHistory);
+                    central.addTicket(ticket);
+
+                    // int count = 0;
+
+                    // for (String stringStatusID : statusHistory) {
+                    // System.out.println("\nstatusHistory[" + count + "]: \t" + stringStatusID);
+                    // int statusID = Integer.parseInt(stringStatusID);
+                    // String statusType = central.getStatusByID(statusID).getStatusName();
+                    // if (statusType.equals("Open")) {
+                    // OpenStatus openStatus = new OpenStatus(1, central.getPersonByID(1));
+                    // central.addOpenStatus(openStatus);
+                    // } else {
+                    // status = new OpenStatus(1, central.getPersonByID(1));
+                    // }
+                    // count++;
+                    // }
                     // System.out.println("\nstatusHistory[0]: \t" + statusHistory[0]);
                     // System.out.println("\nstatusHistory[1]: \t" + statusHistory[1]);
                     // System.out.println("\nstatusHistory[2]: \t" + statusHistory[2]);
                     // System.out.println("\nstatusHistory[3]: \t" + statusHistory[3]);
 
                 } catch (NumberFormatException ex) {
-                    throw new CentralException("Unable to parse status id " + properties[0] + " on line " + line_idx
+                    throw new CentralException("Unable to parse ticket id " + properties[0] + " on line " + line_idx
                             + "\nError: " + ex);
                 }
                 line_idx++;
@@ -63,13 +74,24 @@ public class TicketDataManager implements DataManager {
 
     @Override
     public void storeData(Central central) throws IOException {
-        // try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
-        // for (OpenStatus status : central.getOpenStatuses()) {
-        // out.print(status.getID() + SEPARATOR);
-        // out.print(status.getPerson().getID() + SEPARATOR);
-        // out.println();
-        // }
-        // }
+        try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
+            for (Ticket ticket : central.getTickets()) {
+                out.print(ticket.getID() + SEPARATOR);
+                out.print(ticket.getLocation().getID() + SEPARATOR);
+                out.print("[");
+                for (Status status : ticket.getStatusHistory()) {
+                    out.print(status.getID() + ",");
+                }
+                out.print("]" + SEPARATOR);
+
+                // ArrayList<Integer> statusIDs = new ArrayList<Integer>();
+                // for (Status status : ticket.getStatusHistory()) {
+                // statusIDs.add(status.getID());
+                // }
+                // out.print(statusIDs + SEPARATOR);
+                out.println();
+            }
+        }
     }
 
 }
