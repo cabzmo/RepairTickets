@@ -51,11 +51,11 @@ public class Main {
         // new RemoveFloor(1).execute(central);
         // new RemoveApartment(1).execute(central);
 
-        new OpenTicket(central.getFloorByID(2),
-                central.getManagerByID(1)).execute(central);
-
-        // new SetInProgress(central.getTicketByID(1),
+        // new OpenTicket(central.getFloorByID(2),
         // central.getManagerByID(1)).execute(central);
+
+        // new SetInProgress(central.getTicketByID(2),
+        // central.getTenantByID(2)).execute(central);
 
         // new SetInProgress(central.getTicketByID(1),
         // central.getTenantByID(2)).execute(central);
@@ -78,14 +78,22 @@ public class Main {
         // System.out.println("\n" + central.getTicketByID(1).getStatusHistory());
         // System.out.println("\n" + central.getTicketByID(1).getStatus().getID());
 
-        System.out.println("Statuses: ");
+        System.out.println("Statuses: \n");
         for (Status status : central.getStatuses()) {
-            System.out.println(status.getID());
+            System.out.println("\tID: " + status.getID());
+            System.out.println("\t\t" + status);
+            System.out.println();
         }
 
-        System.out.println("Tickets: ");
+        System.out.println("Tickets: \n");
         for (Ticket ticket : central.getTickets()) {
-            System.out.println(ticket.getID());
+            System.out.println(ticket);
+            for (Status status : ticket.getStatusHistory()) {
+                System.out.println("\tID: " + status.getID());
+                System.out.println("\t\t" + status);
+            }
+            // System.out.println(ticket.getStatusHistory());
+            System.out.println();
         }
 
         CentralData.store(central);

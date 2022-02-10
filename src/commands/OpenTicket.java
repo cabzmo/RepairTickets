@@ -26,7 +26,7 @@ public class OpenTicket implements Command {
         OpenStatus openStatus = new OpenStatus(++maxStatusID, this.person);
 
         // central.addStatus(openStatus);
-        central.addOpenStatus(openStatus);
+        // central.addOpenStatus(openStatus);
 
         int maxTicketID = 0;
         if (central.getTickets().size() > 0) {

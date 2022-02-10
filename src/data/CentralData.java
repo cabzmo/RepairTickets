@@ -19,6 +19,7 @@ public class CentralData {
         dataManagers.add(new TenantDataManager());
         dataManagers.add(new OpenStatusDataManager());
         dataManagers.add(new InProgressStatusDataManager());
+        dataManagers.add(new ClosedStatusDataManager());
         dataManagers.add(new TicketDataManager());
     }
 

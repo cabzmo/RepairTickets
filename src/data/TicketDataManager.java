@@ -28,12 +28,7 @@ public class TicketDataManager implements DataManager {
                     int id = Integer.parseInt(properties[0]);
                     int locationID = Integer.parseInt(properties[1]);
 
-                    // ID::locatioID::statusHistory
-                    System.out.println("\nproperties[0]: \t" + properties[0]);
-                    System.out.println("\nproperties[1]: \t" + properties[1]);
-                    System.out.println("\nproperties[2]: \t" + properties[2]);
                     String numWithCommas = properties[2].substring(1, properties[2].length() - 2);
-                    System.out.println("\nNumbers with commas: \t" + numWithCommas);
                     String[] stringStatusHistory = numWithCommas.split(",", -1);
 
                     ArrayList<Status> statusHistory = new ArrayList<Status>();
@@ -42,26 +37,8 @@ public class TicketDataManager implements DataManager {
                         statusHistory.add(central.getStatusByID(statusID));
                     }
                     Ticket ticket = new Ticket(id, central.getLocationByID(locationID), statusHistory);
+                    // ticket.setStatus(statusHistory.get(statusHistory.size() - 1));
                     central.addTicket(ticket);
-
-                    // int count = 0;
-
-                    // for (String stringStatusID : statusHistory) {
-                    // System.out.println("\nstatusHistory[" + count + "]: \t" + stringStatusID);
-                    // int statusID = Integer.parseInt(stringStatusID);
-                    // String statusType = central.getStatusByID(statusID).getStatusName();
-                    // if (statusType.equals("Open")) {
-                    // OpenStatus openStatus = new OpenStatus(1, central.getPersonByID(1));
-                    // central.addOpenStatus(openStatus);
-                    // } else {
-                    // status = new OpenStatus(1, central.getPersonByID(1));
-                    // }
-                    // count++;
-                    // }
-                    // System.out.println("\nstatusHistory[0]: \t" + statusHistory[0]);
-                    // System.out.println("\nstatusHistory[1]: \t" + statusHistory[1]);
-                    // System.out.println("\nstatusHistory[2]: \t" + statusHistory[2]);
-                    // System.out.println("\nstatusHistory[3]: \t" + statusHistory[3]);
 
                 } catch (NumberFormatException ex) {
                     throw new CentralException("Unable to parse ticket id " + properties[0] + " on line " + line_idx
